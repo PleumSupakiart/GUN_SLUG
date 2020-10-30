@@ -19,9 +19,9 @@ int main()
     sf::View view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(VIEW_HEIGHT, VIEW_HEIGHT));
 
     sf::Texture playerTexture;
-    playerTexture.loadFromFile("run.png");
+    playerTexture.loadFromFile("standrun.png");
 
-    Player player(&playerTexture, sf::Vector2u(6, 2), 0.11f, 100.0f, 400.0f); // rate of picture sprite a little dramatically >> so fast (speed in x, jump high in y)
+    Player player(&playerTexture, sf::Vector2u(8, 2), 0.11f, 100.0f, 400.0f); // rate of picture sprite a little dramatically >> so fast (speed in x, jump high in y)
 
     std::vector<Platform> platforms;
  
@@ -61,7 +61,7 @@ int main()
 
         view.setCenter(player.GetPosition());
 
-        window.clear(sf::Color(150, 150, 150));
+        window.clear(/*sf::Color(150, 150, 150)*/);
         window.setView(view);
         player.Draw(window);
         
