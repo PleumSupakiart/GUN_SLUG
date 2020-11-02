@@ -26,13 +26,12 @@ void Player::Update(float deltaTime)
 	
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::A) && sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
 	{
-		velocity.x -= speed*2;
+		velocity.x -= speed*0.5;
 		
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
 	{
-		
-		velocity.x += speed * 2;
+		velocity.x += speed * 0.5;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
@@ -48,7 +47,11 @@ void Player::Update(float deltaTime)
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && canJump)
 	{
-		row = 2;
+		if (canJump == 1)
+		{
+			row = 2;
+		}
+		
 		canJump = false;
 		velocity.y = -sqrtf(6.0f * 980.0f * jumpHeight);
 		// squar root ( 2.0f * gravity * jumpHeight);

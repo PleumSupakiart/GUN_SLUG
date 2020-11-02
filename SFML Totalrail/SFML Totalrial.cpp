@@ -42,7 +42,7 @@ int main()
      sf::RectangleShape bg1(Vector2f(1520, 720));
     bg1.setTexture(&background);
 
-    Player player(&playerTexture, sf::Vector2u(8, 3), 0.1f, 100.0f, 400.0f); // rate of picture sprite a little dramatically >> so fast (speed in x, jump high in y)
+    Player player(&playerTexture, sf::Vector2u(8, 3), 0.1f, 100.0f, 300.0f); // rate of picture sprite a little dramatically >> so fast (speed in x, jump high in y)
 
     std::vector<Platform> platforms;
  
@@ -50,9 +50,9 @@ int main()
    /*02*/ platforms.push_back(Platform(nullptr, sf::Vector2f(160.0f, 3.0f), sf::Vector2f(140.0f, 520.0f)));  // (wild,high)  ((left,right),(up,down)) point+ box right/down ,point- box left/up
    /*03*/ platforms.push_back(Platform(nullptr, sf::Vector2f(500.0f, 3.0f), sf::Vector2f(600.0f, 390.0f)));  // (wild,high)  ((left,right),(up,down)) point+ box right/down ,point- box left/up
    /*04*/ platforms.push_back(Platform(nullptr, sf::Vector2f(160.0f, 3.0f), sf::Vector2f(980.0f, 525.0f)));
-   //platforms.push_back(Platform(nullptr, sf::Vector2f(400.0f, 200.0f), sf::Vector2f(500.0f, 0.0f)));      // (wild,high)  (left,right)
-   // platforms.push_back(Platform(nullptr, sf::Vector2f(400.0f, 200.0f), sf::Vector2f(700.0f, 200.0f)));       // (wild,high)  ((left,right),(up,down)) point+ box right/down ,point- box left/up 
-   // platforms.push_back(Platform(nullptr, sf::Vector2f(1000.0f, 100.0f), sf::Vector2f(0.0f, 60.0f))); //floor   // (wild,high)  (left,right)
+   /*05*/ platforms.push_back(Platform(nullptr, sf::Vector2f(500.0f, 3.0f), sf::Vector2f(1350.0f, 390.0f)));
+   
+   
     
     float deltaTime = 0.0f;
     sf::Clock clock;
@@ -90,9 +90,9 @@ int main()
        // window.setView(view);
           window.draw(bg1);
         player.Draw(window);
-      
+      /*
         for (Platform& platform : platforms)
-        platform.Draw(window);
+        platform.Draw(window);*/
       
         window.display();
     }
