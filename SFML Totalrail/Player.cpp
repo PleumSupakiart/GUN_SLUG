@@ -7,11 +7,12 @@ Player::Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, 
 	this->jumpHeight = jumpHeight;
 	row = 0;
 	faceRight = true;
+	
 
 
 	body.setSize(sf::Vector2f(110.0f, 130.0f));
 	body.setOrigin(body.getSize() / 2.0f);
-	body.setPosition(800,100);
+	body.setPosition(0,0);
 	body.setTexture(texture);
 }
 
@@ -23,6 +24,7 @@ Player::~Player()
 void Player::Update(float deltaTime)
 {
 	velocity.x = 0.0f;
+	int WINDOW_WIDTH = 1580;
 	
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::A) && sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
 	{
@@ -80,6 +82,16 @@ void Player::Update(float deltaTime)
 	animation.Update(row, deltaTime, faceRight);
 	body.setTextureRect(animation.uvRect);
 	body.move(velocity * deltaTime);
+
+	// left window collition
+	if (body.getPosition().x < 0)
+	{
+		body.setPosition(0, body.getPosition().y);
+	}
+	if (body.getPosition().x + body.getGlobalBounds().width > WINDOW_WIDTH)
+	{
+		body.setPosition(WINDOW_WIDTH - body.getGlobalBounds().width, body.getPosition().y);
+	}
 	
 }
 

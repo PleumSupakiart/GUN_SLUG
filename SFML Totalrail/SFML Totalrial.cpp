@@ -83,8 +83,8 @@ int main()
                 player.OnCollision(direction);
 
 
-
-       // view.setCenter(player.GetPosition());
+       
+        //view.setCenter(player.GetPosition());
         
         window.clear(sf::Color(150, 150, 150));
        // window.setView(view);
