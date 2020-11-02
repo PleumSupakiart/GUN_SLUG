@@ -1,10 +1,27 @@
+#pragma once
 #include<SFML/Graphics.hpp>
-#include<vector>
+#include<SFML/System.hpp>
+#include<SFML/Window.hpp>
+#include<SFML/OpenGL.hpp>
+#include<thread>
+#include<math.h>
 #include<iostream>
+#include<string>
+#include<vector>
+#include<algorithm>
+#include<typeinfo>
+#include<random>
+#include<windows.h>
+#include<unordered_map> 
+#include <time.h>
 #include "Player.h"
 #include "Platform.h"
 
-static const float VIEW_HEIGHT = 512.0f;
+using namespace sf;
+using namespace std;
+
+
+static const float VIEW_HEIGHT = 800.0f;
 
 void ResizeView(const sf::RenderWindow& window, sf::View& view)
 {
@@ -12,22 +29,30 @@ void ResizeView(const sf::RenderWindow& window, sf::View& view)
     view.setSize(VIEW_HEIGHT * aspecRatio, VIEW_HEIGHT);
 }
 
-
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(1080, 720), "GUN SLUG", sf::Style::Close | sf::Style::Resize);
-    sf::View view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(VIEW_HEIGHT, VIEW_HEIGHT));
+    sf::RenderWindow window(sf::VideoMode(1520, 720), "GUN SLUG", sf::Style::Close | sf::Style::Resize);
+    sf::View view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(1520.0f, 720.0f));
 
     sf::Texture playerTexture;
-    playerTexture.loadFromFile("standrun.png");
+    playerTexture.loadFromFile("sprite/player/standrunjump.png");
 
-    Player player(&playerTexture, sf::Vector2u(8, 2), 0.11f, 100.0f, 400.0f); // rate of picture sprite a little dramatically >> so fast (speed in x, jump high in y)
+    Texture background;
+    background.loadFromFile("sprite/background/bg1.png");
+     sf::RectangleShape bg1(Vector2f(1520, 720));
+    bg1.setTexture(&background);
+
+    Player player(&playerTexture, sf::Vector2u(8, 3), 0.1f, 100.0f, 400.0f); // rate of picture sprite a little dramatically >> so fast (speed in x, jump high in y)
 
     std::vector<Platform> platforms;
  
-    platforms.push_back(Platform(nullptr, sf::Vector2f(400.0f, 200.0f), sf::Vector2f(500.0f, 0.0f)));      // (wild,high)  (left,right)
-    platforms.push_back(Platform(nullptr, sf::Vector2f(400.0f, 200.0f), sf::Vector2f(700.0f, 200.0f)));       // (wild,high)  ((left,right),(up,down)) point+ box right/down ,point- box left/up 
-    platforms.push_back(Platform(nullptr, sf::Vector2f(1000.0f, 100.0f), sf::Vector2f(500.0f, 500.0f))); //floor   // (wild,high)  (left,right)
+   /*01*/ platforms.push_back(Platform(nullptr, sf::Vector2f(2000.0f, 3.0f), sf::Vector2f(800.0f, 700.0f)));  // (wild,high)  ((left,right),(up,down)) point+ box right/down ,point- box left/up 
+   /*02*/ platforms.push_back(Platform(nullptr, sf::Vector2f(160.0f, 3.0f), sf::Vector2f(140.0f, 520.0f)));  // (wild,high)  ((left,right),(up,down)) point+ box right/down ,point- box left/up
+   /*03*/ platforms.push_back(Platform(nullptr, sf::Vector2f(500.0f, 3.0f), sf::Vector2f(600.0f, 390.0f)));  // (wild,high)  ((left,right),(up,down)) point+ box right/down ,point- box left/up
+   /*04*/ platforms.push_back(Platform(nullptr, sf::Vector2f(160.0f, 3.0f), sf::Vector2f(980.0f, 525.0f)));
+   //platforms.push_back(Platform(nullptr, sf::Vector2f(400.0f, 200.0f), sf::Vector2f(500.0f, 0.0f)));      // (wild,high)  (left,right)
+   // platforms.push_back(Platform(nullptr, sf::Vector2f(400.0f, 200.0f), sf::Vector2f(700.0f, 200.0f)));       // (wild,high)  ((left,right),(up,down)) point+ box right/down ,point- box left/up 
+   // platforms.push_back(Platform(nullptr, sf::Vector2f(1000.0f, 100.0f), sf::Vector2f(0.0f, 60.0f))); //floor   // (wild,high)  (left,right)
     
     float deltaTime = 0.0f;
     sf::Clock clock;
@@ -59,12 +84,13 @@ int main()
 
 
 
-        view.setCenter(player.GetPosition());
-
-        window.clear(/*sf::Color(150, 150, 150)*/);
-        window.setView(view);
-        player.Draw(window);
+       // view.setCenter(player.GetPosition());
         
+        window.clear(sf::Color(150, 150, 150));
+       // window.setView(view);
+          window.draw(bg1);
+        player.Draw(window);
+      
         for (Platform& platform : platforms)
         platform.Draw(window);
       
