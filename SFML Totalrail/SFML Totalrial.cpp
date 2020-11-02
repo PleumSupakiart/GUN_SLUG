@@ -13,6 +13,7 @@
 #include<random>
 #include<windows.h>
 #include<unordered_map> 
+#include<SFML/Audio.hpp>
 #include <time.h>
 #include "Player.h"
 #include "Platform.h"
@@ -41,6 +42,18 @@ int main()
     background.loadFromFile("sprite/background/bg1.png");
      sf::RectangleShape bg1(Vector2f(1520, 720));
     bg1.setTexture(&background);
+
+    SoundBuffer soundback;
+    if (!soundback.loadFromFile("sound/Metal Slug.wav"))
+    {
+        cout << "ERROR LOAD SOUND" << endl;
+    }
+    Sound sound;
+    sound.setBuffer(soundback);
+    sound.setVolume(100);
+    sound.setLoop(true);
+    sound.play();
+
 
     Player player(&playerTexture, sf::Vector2u(8, 3), 0.1f, 100.0f, 300.0f); // rate of picture sprite a little dramatically >> so fast (speed in x, jump high in y)
 
@@ -85,6 +98,10 @@ int main()
 
        
         //view.setCenter(player.GetPosition());
+        if (Keyboard::isKeyPressed(Keyboard::Escape))
+        {
+            window.close();
+        }
         
         window.clear(sf::Color(150, 150, 150));
        // window.setView(view);
