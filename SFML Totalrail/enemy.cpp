@@ -1,67 +1,67 @@
-#include "Player.h"
+#include "enemy.h"
 
-Player::Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed,float jumpHeight) :
+enemy::enemy(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, float jumpHeight) :
 	animation(texture, imageCount, switchTime)
 {
-	this->speed = speed*3;
+	this->speed = speed * 3;
 	this->jumpHeight = jumpHeight;
 	row = 0;
 	faceRight = true;
-	
+
 
 
 	body.setSize(sf::Vector2f(110.0f, 130.0f));
 	body.setOrigin(body.getSize() / 2.0f);
-	body.setPosition(800,100);
+	body.setPosition(1300, 400);
 	body.setTexture(texture);
 }
 
-Player::~Player()
+enemy::~enemy()
 {
 
 }
 
-void Player::Update(float deltaTime)
+void enemy::Update(float deltaTime)
 {
 	velocity.x = 0.0f;
 	int WINDOW_WIDTH = 1580;
-	
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::A) && sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
+
+	/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
 	{
-		velocity.x -= speed*0.5;
-		
+		velocity.x -= speed * 0.5;
+
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
 	{
 		velocity.x += speed * 0.5;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
 		row = 1;
 		velocity.x -= speed;
-		
+
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
 		row = 1;
 		velocity.x += speed;
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && canJump)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && canJump)
 	{
 		if (canJump == 1)
 		{
 			row = 2;
 		}
-		
+
 		canJump = false;
 		velocity.y = -sqrtf(6.0f * 980.0f * jumpHeight);
 		// squar root ( 2.0f * gravity * jumpHeight);
-		
+
 	}
 
 	velocity.y += 4 * 981.0f * deltaTime;
-	
+
 
 	if (velocity.x == 0.0f)
 	{
@@ -71,13 +71,13 @@ void Player::Update(float deltaTime)
 
 	else
 	{
-		
+
 
 		if (velocity.x > 0.0f)
 			faceRight = true;
 		else
 			faceRight = false;
-	}
+	}*/
 
 	animation.Update(row, deltaTime, faceRight);
 	body.setTextureRect(animation.uvRect);
@@ -88,20 +88,19 @@ void Player::Update(float deltaTime)
 	{
 		body.setPosition(0, body.getPosition().y);
 	}
-	/*
 	if (body.getPosition().x + body.getGlobalBounds().width > WINDOW_WIDTH)
 	{
 		body.setPosition(WINDOW_WIDTH - body.getGlobalBounds().width, body.getPosition().y);
-	}*/
-	
+	}
+
 }
 
-void Player::Draw(sf::RenderWindow& window)
+void enemy::Draw(sf::RenderWindow& window)
 {
 	window.draw(body);
 }
 
-void Player::OnCollision(sf::Vector2f direction)
+void enemy::OnCollision(sf::Vector2f direction)
 {
 	if (direction.x < 0.0f)
 	{
