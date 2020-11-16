@@ -17,7 +17,6 @@
 #include <time.h>
 #include "Player.h"
 #include "Platform.h"
-
 #include "menu.h"
 
 using namespace sf;
@@ -42,12 +41,11 @@ int main()
     sf::Texture playerTexture;
     playerTexture.loadFromFile("sprite/player/standrunjump.png");
 
-    sf::Texture enemyTexture;
-    enemyTexture.loadFromFile("sprite/enemy/shock.png");
+  
 
     Texture background;
-    background.loadFromFile("sprite/background/bg1.png");
-     sf::RectangleShape bg1(Vector2f(1520, 720));
+    background.loadFromFile("sprite/background/background1.png");
+     sf::RectangleShape bg1(Vector2f(8000, 820));
     bg1.setTexture(&background);
 
     Texture bgmenu;
@@ -73,9 +71,9 @@ int main()
 
     std::vector<Platform> platforms;
  
-   /*01*/ platforms.push_back(Platform(nullptr, sf::Vector2f(2000.0f, 3.0f), sf::Vector2f(800.0f, 700.0f)));  // (wild,high)  ((left,right),(up,down)) point+ box right/down ,point- box left/up 
-   /*02*/ platforms.push_back(Platform(nullptr, sf::Vector2f(160.0f, 3.0f), sf::Vector2f(140.0f, 520.0f)));  // (wild,high)  ((left,right),(up,down)) point+ box right/down ,point- box left/up
-   /*03*/ platforms.push_back(Platform(nullptr, sf::Vector2f(500.0f, 3.0f), sf::Vector2f(600.0f, 390.0f)));  // (wild,high)  ((left,right),(up,down)) point+ box right/down ,point- box left/up
+   /*01*/ platforms.push_back(Platform(nullptr, sf::Vector2f(2000.0f, 50.0f), sf::Vector2f(1315.0f, 645.0f)));  // (wild,high)  ((left,right),(up,down)) point+ box right/down ,point- box left/up 
+   /*02*/ platforms.push_back(Platform(nullptr, sf::Vector2f(9000.0f, 3.0f), sf::Vector2f(200.0f, 770.0f)));  // (wild,high)  ((left,right),(up,down)) point+ box right/down ,point- box left/up
+   /*03*/ platforms.push_back(Platform(nullptr, sf::Vector2f(190.0f, 3.0f), sf::Vector2f(3100.0f, 600.0f)));  // (wild,high)  ((left,right),(up,down)) point+ box right/down ,point- box left/up
    /*04*/ platforms.push_back(Platform(nullptr, sf::Vector2f(160.0f, 3.0f), sf::Vector2f(980.0f, 525.0f)));
    /*05*/ platforms.push_back(Platform(nullptr, sf::Vector2f(500.0f, 3.0f), sf::Vector2f(1350.0f, 390.0f)));
    
@@ -139,7 +137,7 @@ int main()
 
       
        
-       view.setCenter(player.GetPosition().x,450);
+       view.setCenter(player.GetPosition().x,410);
       
         
         window.clear(sf::Color(150, 150, 150));

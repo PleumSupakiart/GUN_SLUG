@@ -39,21 +39,29 @@ void Player::Update(float deltaTime)
 	{
 		row = 1;
 		velocity.x -= speed;
+		if (velocity.y > 0 || velocity.y < 0)
+		{
+			row = 2;
+		}
 		
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
 		row = 1;
 		velocity.x += speed;
+		if (velocity.y > 0 || velocity.y < 0)
+		{
+			row = 2;
+		}
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && canJump)
 	{
+		
 		if (canJump == 1)
 		{
 			row = 2;
 		}
-		
 		canJump = false;
 		velocity.y = -sqrtf(6.0f * 980.0f * jumpHeight);
 		// squar root ( 2.0f * gravity * jumpHeight);
@@ -67,7 +75,7 @@ void Player::Update(float deltaTime)
 	{
 		row = 0;
 	}
-
+	
 
 	else
 	{
@@ -84,10 +92,11 @@ void Player::Update(float deltaTime)
 	body.move(velocity * deltaTime);
 
 	// left window collition
-	if (body.getPosition().x < 0)
+	if (body.getPosition().x < 780)
 	{
-		body.setPosition(0, body.getPosition().y);
+		body.setPosition(780, body.getPosition().y);
 	}
+	// right window collition
 	/*
 	if (body.getPosition().x + body.getGlobalBounds().width > WINDOW_WIDTH)
 	{
