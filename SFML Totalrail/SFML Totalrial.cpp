@@ -17,7 +17,7 @@
 #include <time.h>
 #include "Player.h"
 #include "Platform.h"
-#include "enemy.h"
+
 #include "menu.h"
 
 using namespace sf;
@@ -69,7 +69,7 @@ int main()
 
 
     Player player(&playerTexture, sf::Vector2u(8, 3), 0.1f, 100.0f, 300.0f); // rate of picture sprite a little dramatically >> so fast (speed in x, jump high in y)
-    enemy enemy(&enemyTexture, sf::Vector2u(10, 1), 0.1f, 100.0f, 300.0f);
+  
 
     std::vector<Platform> platforms;
  
@@ -130,18 +130,14 @@ int main()
         }
 
         player.Update(deltaTime);
-        enemy.Update(deltaTime);
-
+    
         sf::Vector2f direction;
 
         for (Platform& platform : platforms)
             if (platform.GetCollider().CheckCollision(&player.GetCollider(), direction, 1.0f))
                 player.OnCollision(direction);
 
-        for (Platform& platform : platforms)
-            if (platform.GetCollider().CheckCollision(&enemy.GetCollider(), direction, 1.0f))
-                enemy.OnCollision(direction);
-
+      
        
        view.setCenter(player.GetPosition().x,450);
       
@@ -150,7 +146,7 @@ int main()
      
           window.draw(bg1);
         player.Draw(window);
-        enemy.Draw(window);
+      
 
         Event::KeyReleased;
         if (Keyboard::isKeyPressed(Keyboard::Escape))
