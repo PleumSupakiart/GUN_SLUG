@@ -39,7 +39,7 @@ int main()
     menu menu(window.getSize().x, window.getSize().y);
 
     sf::Texture playerTexture;
-    playerTexture.loadFromFile("sprite/player/standrunjump.png");
+    playerTexture.loadFromFile("sprite/player/playersheet.png");
 
   
 
@@ -66,7 +66,7 @@ int main()
     //sound.play();
 
 
-    Player player(&playerTexture, sf::Vector2u(8, 3), 0.1f, 100.0f, 300.0f); // rate of picture sprite a little dramatically >> so fast (speed in x, jump high in y)
+    Player player(&playerTexture, sf::Vector2u(8, 5), 0.09f, 100.0f, 300.0f); // rate of picture sprite a little dramatically >> so fast (speed in x, jump high in y)
   
 
     std::vector<Platform> platforms;
@@ -77,7 +77,7 @@ int main()
    /*04*/ platforms.push_back(Platform(nullptr, sf::Vector2f(550.0f, 3.0f), sf::Vector2f(3570.0f, 450.0f)));
    /*05*/ platforms.push_back(Platform(nullptr, sf::Vector2f(200.0f, 3.0f), sf::Vector2f(3960.0f, 600.0f)));
    /*06*/ platforms.push_back(Platform(nullptr, sf::Vector2f(460.0f, 3.0f), sf::Vector2f(4310.0f, 450.0f)));
-   /*07*/ platforms.push_back(Platform(nullptr, sf::Vector2f(520.0f, 3.0f), sf::Vector2f(5010.0f, 450.0f)));
+   /*07*/ platforms.push_back(Platform(nullptr, sf::Vector2f(520.0f, 3.0f), sf::Vector2f(5010.0f, 440.0f)));
    /*08*/ platforms.push_back(Platform(nullptr, sf::Vector2f(200.0f, 3.0f), sf::Vector2f(5420.0f, 600.0f)));
    
    
