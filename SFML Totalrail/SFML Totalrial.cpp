@@ -18,6 +18,7 @@
 #include "Player.h"
 #include "Platform.h"
 #include "menu.h"
+#include "Bullet.h"
 
 using namespace sf;
 using namespace std;
@@ -41,7 +42,15 @@ int main()
     sf::Texture playerTexture;
     playerTexture.loadFromFile("sprite/player/playersheet.png");
 
-  
+    std::vector<Bullet> bullet;
+
+    Texture bullet_texture;
+    bullet_texture.loadFromFile("sprite/bullet.png");
+    sf::RectangleShape bullett(Vector2f(31,12));
+    bullett.setTexture(&bullet_texture);
+
+    sf::Clock bullTime;
+    float bull = 0.0f;
 
     Texture background;
     background.loadFromFile("sprite/background/background1.png");
@@ -142,7 +151,9 @@ int main()
        
        view.setCenter(player.GetPosition().x,410);
       
-        
+       for (Bullet& bullet : bullet)
+           bullet.Update(deltaTime);
+       
         window.clear(sf::Color(150, 150, 150));
      
           window.draw(bg1);
@@ -156,6 +167,16 @@ int main()
              menu.draw(window);
       
         }
+        bull = bullTime.getElapsedTime().asMilliseconds();
+        if (bull > 200)
+        {
+            if (Keyboard::isKeyPressed(sf::Keyboard::J))
+            {
+                bullet.push_back(Bullet(&bullet_texture,Vector2u(1,1),5, Vector2f(player.GetPosition().x + 15, player.GetPosition().y)));
+                bullTime.restart();
+            }
+           
+        }
         
        window.setView(view); 
         
@@ -163,6 +184,8 @@ int main()
       
         for (Platform& platform : platforms)
         platform.Draw(window);
+        for (Bullet& bullet : bullet)
+            bullet.Draw(window);
       
         window.display();
     }

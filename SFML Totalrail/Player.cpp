@@ -149,3 +149,7 @@ void Player::OnCollision(sf::Vector2f direction)
 		velocity.y = 0.0f;
 	}
 }
+void Player::setPosition(const float x, float y)
+{
+	this->body.setPosition(x, y);
+}

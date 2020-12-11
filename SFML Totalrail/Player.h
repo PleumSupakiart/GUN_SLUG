@@ -12,6 +12,7 @@ public:
 	void Update(float deltaTime);
 	void Draw(sf::RenderWindow& window);
 	void OnCollision(sf::Vector2f direction);
+	void setPosition(const float x, float y);
 
 	const sf::Vector2f GetPosition() { return body.getPosition(); }
 	Collider GetCollider() { return Collider(body); }
